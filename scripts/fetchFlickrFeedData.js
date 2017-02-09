@@ -46,7 +46,11 @@ async function fetchPhotoDataFromFlickr(photoFeed) {
 
 function writePhotoDataToFile(photos) {
     for (let photo of photos) {
-        Fs.appendFile(flickerPhotoFeedDataPath, JSON.stringify(photo) + '\n');
+        Fs.appendFile(flickerPhotoFeedDataPath, JSON.stringify(photo) + '\n', (error) => {
+            if (error) {
+                console.log(error);
+            }
+        });
     }
 
     photoCounter += photos.length;
